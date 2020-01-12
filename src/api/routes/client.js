@@ -1,16 +1,19 @@
 import { Router } from 'express';
 import App from '../../app/App';
+import { DataProvider } from '../../app/components/DataContext';
 import React from 'react';
 import { StaticRouter } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
 import { ServerStyleSheets, ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../../common/theme';
+import serialize from 'serialize-javascript'; // Safer stringify, prevents XSS attacks
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 const router = Router();
 
 router.get('*', (req, res) => {
+  const { data } = req.app.inject;
   const context = {};
   const sheets = new ServerStyleSheets();
   const markup = renderToString(
@@ -24,8 +27,6 @@ router.get('*', (req, res) => {
     )
   );
 
-  console.log('assets :', assets);
-  console.log('context :', context);
   if (context.url) {
     res.redirect(context.url);
   } else {
@@ -48,7 +49,10 @@ router.get('*', (req, res) => {
                 : `<script src="${assets.client.js}" defer crossorigin></script>`
             }
             </head>
-            <body><div id="root">${markup}</div></body>
+            <body>
+              <div id="root">${markup}</div>
+              <script>window.env = ${serialize({ data })}</script>
+            </body>
         </html>`
     );
   }
