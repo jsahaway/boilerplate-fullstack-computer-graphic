@@ -1,4 +1,4 @@
 import client from './client';
-import opencv from './opencv';
+// import opencv from './opencv';
 
-export default { client, opencv };
+export default { client };
