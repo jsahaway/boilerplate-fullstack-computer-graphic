@@ -21,7 +21,7 @@
     "fs-extra": "^8.1.0",
     "graphql": "^14.5.8",
     "graphql-tools": "^4.0.6",
-    "gsap": "^3.0.1",
+    "gsap": "^3.6.0",
     "helmet": "^3.21.2",
     "opencv4nodejs": "^5.5.0",
     "razzle": "^3.0.0",
