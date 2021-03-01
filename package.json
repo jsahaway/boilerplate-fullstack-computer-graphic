@@ -32,7 +32,7 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "serialize-javascript": "^2.1.2",
-    "three": "^0.110.0"
+    "three": "^0.125.0"
   },
   "devDependencies": {
     "redux-devtools-extension": "^2.13.8"
